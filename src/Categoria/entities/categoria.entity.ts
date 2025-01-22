@@ -1,10 +1,9 @@
-import { Transform, TransformFnParams } from "class-transformer";
-import { IsNotEmpty } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Transform, TransformFnParams } from 'class-transformer';
+import { IsNotEmpty } from 'class-validator';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'tb_categorias' })
 export class Categoria {
-
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -15,8 +14,5 @@ export class Categoria {
 
   @Transform(({ value }: TransformFnParams) => value?.trim())
   @Column({ length: 5000, nullable: true })
-  descricao: string; 
-
-
+  descricao: string;
 }
-

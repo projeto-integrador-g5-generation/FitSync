@@ -1,8 +1,7 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Categoria } from "../entities/categoria.entity";
-import { DeleteResult, ILike, Repository } from "typeorm";
-
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Categoria } from '../entities/categoria.entity';
+import { DeleteResult, ILike, Repository } from 'typeorm';
 
 @Injectable()
 export class CategoriaService {
@@ -10,7 +9,6 @@ export class CategoriaService {
     @InjectRepository(Categoria)
     private categoriaRepository: Repository<Categoria>,
   ) {}
-
 
   async findAll(): Promise<Categoria[]> {
     return await this.categoriaRepository.find();
@@ -23,8 +21,10 @@ export class CategoriaService {
       },
     });
     if (!Categoria)
-      throw new HttpException('Categoria não encontrada!',HttpStatus.NOT_FOUND,
-    );
+      throw new HttpException(
+        'Categoria não encontrada!',
+        HttpStatus.NOT_FOUND,
+      );
     return Categoria;
   }
 
@@ -50,5 +50,3 @@ export class CategoriaService {
     return await this.categoriaRepository.delete(id);
   }
 }
-
-

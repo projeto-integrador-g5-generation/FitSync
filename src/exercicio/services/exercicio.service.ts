@@ -1,47 +1,50 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { DeleteResult, ILike, Repository } from "typeorm";
-import { Exercicio } from "../entities/exercicio.entity";
-
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { DeleteResult, ILike, Repository } from 'typeorm';
+import { Exercicio } from '../entities/exercicio.entity';
 
 @Injectable()
-export class ExercicioService{
-    constructor(
-        @InjectRepository(Exercicio)
-        private exercicioRepository: Repository<Exercicio>,
-    ){}
+export class ExercicioService {
+  constructor(
+    @InjectRepository(Exercicio)
+    private exercicioRepository: Repository<Exercicio>,
+  ) {}
 
-    async findAll(): Promise<Exercicio[]>{
-        return this.exercicioRepository.find();
+  async findAll(): Promise<Exercicio[]> {
+    return this.exercicioRepository.find();
+  }
+
+  async findById(id: number): Promise<Exercicio> {
+    const exercicio = await this.exercicioRepository.findOne({ where: { id } });
+
+    if (!exercicio) {
+      throw new HttpException(
+        'Exercicio não encontrado.',
+        HttpStatus.NOT_FOUND,
+      );
     }
 
-    async findById(id: number): Promise<Exercicio>{
-        const exercicio = await this.exercicioRepository.findOne({where: {id}})
+    return exercicio;
+  }
 
-        if(!exercicio){
-            throw new HttpException('Exercicio não encontrado.', HttpStatus.NOT_FOUND)
-        }
+  async findByNome(nome: string): Promise<Exercicio[]> {
+    return this.exercicioRepository.find({
+      where: { nome: ILike(`%${nome}%`) },
+    });
+  }
 
-        return exercicio;
-    }
+  async create(exercicio: Exercicio): Promise<Exercicio> {
+    return await this.exercicioRepository.save(exercicio);
+  }
 
-    async findByNome(nome: string): Promise<Exercicio[]>{
-        return this.exercicioRepository.find({where: {nome: ILike(`%${nome}%`)}});
-    }
+  async update(exercicio: Exercicio): Promise<Exercicio> {
+    await this.findById(exercicio.id);
+    return await this.exercicioRepository.save(exercicio);
+  }
 
-    async create(exercicio: Exercicio): Promise<Exercicio>{
-        return await this.exercicioRepository.save(exercicio);
-    }
+  async delete(id: number): Promise<DeleteResult> {
+    await this.findById(id);
 
-    async update(exercicio: Exercicio): Promise<Exercicio>{
-        await this.findById(exercicio.id)
-        return await this.exercicioRepository.save(exercicio);
-    }
-
-    async delete(id: number): Promise<DeleteResult>{
-        await this.findById(id)
-
-        return await this.exercicioRepository.delete(id)
-    }
-
+    return await this.exercicioRepository.delete(id);
+  }
 }

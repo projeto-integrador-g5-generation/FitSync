@@ -1,7 +1,17 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
-import { CategoriaService } from "../services/categoria.service";
-import { Categoria } from "../entities/categoria.entity";
-
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { CategoriaService } from '../services/categoria.service';
+import { Categoria } from '../entities/categoria.entity';
 
 @Controller('/categoria')
 export class CategoriaController {
@@ -31,7 +41,6 @@ export class CategoriaController {
     return this.categoriaService.create(categoria);
   }
 
-
   @Put()
   @HttpCode(HttpStatus.CREATED)
   update(@Body() categoria: Categoria): Promise<Categoria> {
@@ -43,11 +52,4 @@ export class CategoriaController {
   delete(@Param('id', ParseIntPipe) id: number) {
     return this.categoriaService.delete(id);
   }
-
-
 }
-
-
-
-
-
