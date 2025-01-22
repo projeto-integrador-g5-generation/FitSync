@@ -1,5 +1,6 @@
 import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { NumericTransformer } from '../../util/numerictransformer';
 
 @Entity({ name: 'tb_usuarios' })
 export class Usuario {
@@ -34,4 +35,7 @@ export class Usuario {
 
   @Column({ length: 5000 })
   foto: string;
+
+  @Column('decimal',{precision: 5, scale: 2, transformer: new NumericTransformer()})
+  imc: number;
 }
