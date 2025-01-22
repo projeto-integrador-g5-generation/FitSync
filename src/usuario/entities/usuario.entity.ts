@@ -36,6 +36,10 @@ export class Usuario {
   @Column({ length: 5000 })
   foto: string;
 
-  @Column('decimal',{precision: 5, scale: 2, transformer: new NumericTransformer()})
+  @Column('decimal', {
+    precision: 5,
+    scale: 2,
+    transformer: new NumericTransformer(),
+  })
   imc: number;
 }

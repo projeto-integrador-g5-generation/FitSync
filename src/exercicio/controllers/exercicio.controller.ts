@@ -31,8 +31,8 @@ export class ExercicioController {
 
   @Get('/nome-exercicio/:nome')
   @HttpCode(HttpStatus.OK)
-  findByTitulo(@Param('nome') nome: string): Promise<Exercicio[]> {
-    return this.exercicioService.findByNome(nome);
+  findByName(@Param('nome') nome: string): Promise<Exercicio[]> {
+    return this.exercicioService.findByName(nome);
   }
 
   @Post()
