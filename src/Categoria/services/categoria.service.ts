@@ -11,14 +11,19 @@ export class CategoriaService {
   ) {}
 
   async findAll(): Promise<Categoria[]> {
-    return await this.categoriaRepository.find();
+    return await this.categoriaRepository.find({relations:{
+      exercicio : true,
+    }});
+    
   }
 
   async findById(id: number): Promise<Categoria> {
     const Categoria = await this.categoriaRepository.findOne({
       where: {
         id,
-      },
+      },relations:{
+        exercicio : true,
+      }
     });
     if (!Categoria)
       throw new HttpException(
@@ -32,7 +37,9 @@ export class CategoriaService {
     return await this.categoriaRepository.find({
       where: {
         nome: ILike(`%${nome}%`),
-      },
+      },relations:{
+        exercicio : true,
+      }
     });
   }
 

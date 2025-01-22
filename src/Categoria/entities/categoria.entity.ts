@@ -1,6 +1,7 @@
 import { Transform, TransformFnParams } from 'class-transformer';
 import { IsNotEmpty } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Exercicio } from 'src/exercicio/entities/exercicio.entity';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'tb_categorias' })
 export class Categoria {
@@ -15,4 +16,8 @@ export class Categoria {
   @Transform(({ value }: TransformFnParams) => value?.trim())
   @Column({ length: 5000, nullable: true })
   descricao: string;
+
+  @OneToMany(() => Exercicio, (exercicio) => exercicio.categoria, { onDelete: 'CASCADE' })
+  exercicio: Exercicio[];
+
 }

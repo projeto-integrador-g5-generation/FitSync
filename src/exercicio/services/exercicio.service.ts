@@ -11,11 +11,15 @@ export class ExercicioService {
   ) {}
 
   async findAll(): Promise<Exercicio[]> {
-    return this.exercicioRepository.find();
+    return this.exercicioRepository.find({relations:{
+      categoria : true,
+    }});
   }
 
   async findById(id: number): Promise<Exercicio> {
-    const exercicio = await this.exercicioRepository.findOne({ where: { id } });
+    const exercicio = await this.exercicioRepository.findOne({ where: { id },relations:{
+      categoria: true,
+    } });
 
     if (!exercicio) {
       throw new HttpException(
@@ -30,6 +34,9 @@ export class ExercicioService {
   async findByNome(nome: string): Promise<Exercicio[]> {
     return this.exercicioRepository.find({
       where: { nome: ILike(`%${nome}%`) },
+      relations:{
+        categoria : true,
+      }
     });
   }
 
