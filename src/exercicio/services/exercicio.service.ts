@@ -9,7 +9,7 @@ export class ExercicioService {
   constructor(
     @InjectRepository(Exercicio)
     private exercicioRepository: Repository<Exercicio>,
-    private categoriaService: CategoriaService
+    private categoriaService: CategoriaService,
   ) {}
 
   async findAll(): Promise<Exercicio[]> {

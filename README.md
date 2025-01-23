@@ -43,7 +43,7 @@ A API **FitSync** foi desenvolvida para fornecer uma plataforma fitness personal
 
 ## 3. Diagrama de Classes
 
-<img src="./src/imgs/diagrama_(2).png"/>
+<img src="./src/imgs/diagrama.png"/>
 
 ------
 

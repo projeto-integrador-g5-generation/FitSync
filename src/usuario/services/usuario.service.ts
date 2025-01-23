@@ -71,13 +71,19 @@ export class UsuarioService {
 
   private calcularImc(peso: number, altura: number): number {
     if (isNaN(peso) || isNaN(altura)) {
-      throw new HttpException("Peso e altura devem ser números.", HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'Peso e altura devem ser números.',
+        HttpStatus.BAD_REQUEST,
+      );
     }
     if (peso <= 0 || altura <= 0) {
-        throw new HttpException("Peso e altura devem ser maiores que zero.", HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'Peso e altura devem ser maiores que zero.',
+        HttpStatus.BAD_REQUEST,
+      );
     }
     if (peso > 400) {
-        throw new HttpException("Peso inválido.", HttpStatus.BAD_REQUEST);
+      throw new HttpException('Peso inválido.', HttpStatus.BAD_REQUEST);
     }
     return parseFloat((peso / (altura * altura)).toFixed(2));
   }
