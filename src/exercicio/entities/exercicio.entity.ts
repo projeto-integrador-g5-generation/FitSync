@@ -10,19 +10,19 @@ export class Exercicio {
   nome: string;
 
   @Column({ type: 'int', nullable: true })
-  tempo: number;
+  tempo: number | null;
 
   @Column({ type: 'int', nullable: true })
-  series: number;
+  series: number | null;
 
   @Column({ type: 'int', nullable: true })
-  repeticoes: number;
+  repeticoes: number | null;
 
   @Column({ type: 'int', nullable: true })
-  descanso: number;
+  descanso: number | null;
 
   @Column({ type: 'int', nullable: true })
-  carga: number;
+  carga: number | null;
 
   @ManyToOne(() => Categoria, (categoria) => categoria.exercicio, {
     onDelete: 'CASCADE',
