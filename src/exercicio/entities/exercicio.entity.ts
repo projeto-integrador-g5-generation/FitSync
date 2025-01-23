@@ -24,6 +24,9 @@ export class Exercicio {
   @Column({ type: 'int', nullable: true })
   carga: number | null;
 
+  @Column()
+  video: string;
+
   @ManyToOne(() => Categoria, (categoria) => categoria.exercicio, {
     onDelete: 'CASCADE',
   })
