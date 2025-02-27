@@ -32,7 +32,7 @@ export class Usuario {
   @IsEmail()
   @IsNotEmpty()
   @Column({ length: 255, nullable: false })
-  @ApiProperty({example: "email@email.com.br"})
+  @ApiProperty({ example: 'email@email.com.br' })
   usuario: string;
 
   @MinLength(8)

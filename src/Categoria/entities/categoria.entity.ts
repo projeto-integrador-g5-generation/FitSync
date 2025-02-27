@@ -21,7 +21,7 @@ export class Categoria {
   @ApiProperty()
   descricao: string;
 
-  @ApiProperty({ type: () => Exercicio, isArray: true})
+  @ApiProperty({ type: () => Exercicio, isArray: true })
   @OneToMany(() => Exercicio, (exercicio) => exercicio.categoria, {
     onDelete: 'CASCADE',
   })

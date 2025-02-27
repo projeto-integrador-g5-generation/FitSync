@@ -7,15 +7,18 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-  .setTitle('FitSync')
-  .setDescription('Projeto FitSync')
-  .setContact("G5","https://github.com/projeto-integrador-g5-generation","grupocinco2025@gmail.com")
-  .setVersion('1.0')
-  .build();
+    .setTitle('FitSync')
+    .setDescription('Projeto FitSync')
+    .setContact(
+      'G5',
+      'https://github.com/projeto-integrador-g5-generation',
+      'grupocinco2025@gmail.com',
+    )
+    .setVersion('1.0')
+    .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/swagger', app, document);
 
-  
   process.env.TZ = '-03.00';
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors();
