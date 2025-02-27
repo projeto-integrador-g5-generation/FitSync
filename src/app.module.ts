@@ -7,6 +7,7 @@ import { Usuario } from './usuario/entities/usuario.entity';
 import { CategoriaModule } from './categoria/categoria.module';
 import { ExercicioModule } from './exercicio/exercicio.module';
 import { UsuarioModule } from './usuario/usuario.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -28,7 +29,7 @@ import { UsuarioModule } from './usuario/usuario.module';
     ExercicioModule,
     UsuarioModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
