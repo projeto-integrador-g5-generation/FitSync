@@ -12,7 +12,9 @@ import {
 } from '@nestjs/common';
 import { ExercicioService } from '../services/exercicio.service';
 import { Exercicio } from '../entities/exercicio.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Exercicio')
 @Controller('/exercicios')
 export class ExercicioController {
   constructor(private readonly exercicioService: ExercicioService) {}
