@@ -8,23 +8,17 @@ import { CategoriaModule } from './categoria/categoria.module';
 import { ExercicioModule } from './exercicio/exercicio.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { AppController } from './app.controller';
+import { ProdService } from './data/services/prod.service';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT || '3306'),
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
-      entities: [Categoria, Exercicio, Usuario],
-      synchronize: true,
-      logging: true,
-    }),
+    TypeOrmModule.forRootAsync({
+	    useClass: ProdService,
+      imports: [ConfigModule],
+}),,
     CategoriaModule,
     ExercicioModule,
     UsuarioModule,
